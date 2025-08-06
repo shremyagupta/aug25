@@ -1,5 +1,5 @@
 package trees;
-
+import java.util.*;
 public class pre {
     static class Node{
         int data;
@@ -25,11 +25,42 @@ public class pre {
             return newNode;
         }
     }
+
+
+    public static void traverseOrder(Node root){
+        if(root == null){
+            return;
+        }
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        q.add(null);
+        while(!q.isEmpty()){
+            Node currNode = q.remove();
+            if(currNode == null){
+                System.out.println();
+                if(q.isEmpty()){
+                    break;
+                }
+                else{
+                    q.add(null);
+                }
+            }
+            else{
+                System.out.print(currNode.data + " ");
+                if(currNode.left != null){
+                    q.add(currNode.left);
+                }
+                if(currNode.right!= null){
+                    q.add(currNode.right);
+                }
+            }
+        }
+    }
     public static void main(String[] args) {
         int[] node = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
         BinaryTree.idx = -1; // Reset index before building tree
         Node root = BinaryTree.buildTree(node);
-        System.out.println(root.data);
+        pre.traverseOrder(root);
     }
     
 }
